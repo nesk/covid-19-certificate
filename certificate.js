@@ -77,9 +77,15 @@ async function generatePdf(profile, reason) {
   })
 
   const pdfBytes = await pdfDoc.save()
-  const blob = new Blob([pdfBytes], {type: 'application/pdf'})
-  const blobUrl = URL.createObjectURL(blob)
-  location.assign(blobUrl)
+  return new Blob([pdfBytes], {type: 'application/pdf'})
+}
+
+function downloadBlob(blob, fileName) {
+  const link = document.createElement('a')
+  var url = URL.createObjectURL(blob)
+  link.href = url
+  link.download = fileName
+  link.click()
 }
 
 if (hasProfile()) {
@@ -100,7 +106,9 @@ $('#field-signature').height = formWidth / 1.5
 
 $('#reset-signature').addEventListener('click', () => signaturePad.clear())
 
-$('#form-generate').addEventListener('submit', event => {
+$('#form-generate').addEventListener('submit', async event => {
   event.preventDefault()
-  generatePdf(getProfile(), $('input[name="field-reason"]:checked').value)
+  const reason = $('input[name="field-reason"]:checked').value
+  const pdfBlob = await generatePdf(getProfile(), reason)
+  downloadBlob(pdfBlob, 'attestation.pdf')
 })
