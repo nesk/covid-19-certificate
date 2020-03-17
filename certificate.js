@@ -88,6 +88,21 @@ function downloadBlob(blob, fileName) {
   link.click()
 }
 
+function getAndSaveReason() {
+  const {value} = $('input[name="field-reason"]:checked')
+  localStorage.setItem('last-reason', value)
+  return value
+}
+
+function restoreReason() {
+  const value = localStorage.getItem('last-reason')
+  if (value === null) {
+    return
+  }
+
+  $(`#radio-${value}`).checked = true
+}
+
 if (hasProfile()) {
   $('#form-generate').style.display = 'block'
 } else {
@@ -108,7 +123,9 @@ $('#reset-signature').addEventListener('click', () => signaturePad.clear())
 
 $('#form-generate').addEventListener('submit', async event => {
   event.preventDefault()
-  const reason = $('input[name="field-reason"]:checked').value
+  const reason = getAndSaveReason()
   const pdfBlob = await generatePdf(getProfile(), reason)
   downloadBlob(pdfBlob, 'attestation.pdf')
 })
+
+restoreReason()
