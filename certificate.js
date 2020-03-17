@@ -67,10 +67,10 @@ async function generatePdf(profile, reason) {
 
   const signatureArrayBuffer = await fetch(profile.signature).then(res => res.arrayBuffer())
   const signatureImage = await pdfDoc.embedPng(signatureArrayBuffer)
-  const signatureDimensions = signatureImage.scale(1 / (signatureImage.width / 100))
+  const signatureDimensions = signatureImage.scale(1 / (signatureImage.width / 150))
 
   page.drawImage(signatureImage, {
-    x: page.getWidth() - signatureDimensions.width - 75,
+    x: page.getWidth() - signatureDimensions.width - 100,
     y: 30,
     width: signatureDimensions.width,
     height: signatureDimensions.height,
