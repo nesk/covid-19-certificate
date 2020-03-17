@@ -1,6 +1,7 @@
 const { PDFDocument, StandardFonts } = PDFLib
 
 const $ = (...args) => document.querySelector(...args)
+const $$ = (...args) => document.querySelectorAll(...args)
 const signaturePad = new SignaturePad($('#field-signature'), { minWidth: 1, maxWidth: 3 })
 
 function hasProfile() {
@@ -8,22 +9,20 @@ function hasProfile() {
 }
 
 function saveProfile() {
-  const fieldNames = ['name', 'birthday', 'address', 'town', 'zipcode']
-
-  fieldNames.forEach(name => {
-    localStorage.setItem(name, $(`#field-${name}`).value)
-  })
+  for (field of $$('#form-profile input:not([disabled]):not([type=checkbox])')) {
+    localStorage.setItem(field.id.substring('field-'.length), field.value)
+  }
 
   localStorage.setItem('signature', signaturePad.toDataURL())
 }
 
 function getProfile() {
-  const fieldNames = ['name', 'birthday', 'address', 'town', 'zipcode', 'signature']
-
-  return fieldNames.reduce((fields, name) => {
+  const fields = {}
+  for (let i = 0; i < localStorage.length; i++){
+    const name = localStorage.key(i)
     fields[name] = localStorage.getItem(name)
-    return fields
-  }, {})
+  }
+  return fields
 }
 
 async function generatePdf(profile, reason) {
@@ -61,7 +60,7 @@ async function generatePdf(profile, reason) {
       break
   }
 
-  drawText(profile.town, 375, 140)
+  drawText(profile['done-at'] || profile.town, 375, 140)
   drawText(String((new Date).getDate()), 478, 140)
   drawText(String((new Date).getMonth() + 1).padStart(2, '0'), 502, 140)
 
@@ -107,6 +106,12 @@ function isIos() {
   return Boolean(navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform));
 }
 
+function applyDoneAt() {
+  const { checked } = $('#check-same-town')
+  $('#group-done-at').style.display = checked ? 'none' : 'block';
+  $('#field-done-at').disabled = checked;
+}
+
 if (hasProfile()) {
   $('#form-generate').style.display = 'block'
 } else {
@@ -123,6 +128,9 @@ $('#form-profile').addEventListener('submit', event => {
 if (isIos()) {
   $('#field-birthday').type = 'date'
 }
+
+$('#check-same-town').addEventListener('change', applyDoneAt)
+applyDoneAt()
 
 const formWidth = $('#form-profile').offsetWidth
 $('#field-signature').width = formWidth
