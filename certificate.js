@@ -103,6 +103,10 @@ function restoreReason() {
   $(`#radio-${value}`).checked = true
 }
 
+function isIos() {
+  return Boolean(navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform));
+}
+
 if (hasProfile()) {
   $('#form-generate').style.display = 'block'
 } else {
@@ -114,6 +118,11 @@ $('#form-profile').addEventListener('submit', event => {
   saveProfile()
   location.reload()
 })
+
+// We do not want to use a date field on Android, they're unusable, target only iOS devices.
+if (isIos()) {
+  $('#field-birthday').type = 'date'
+}
 
 const formWidth = $('#form-profile').offsetWidth
 $('#field-signature').width = formWidth
