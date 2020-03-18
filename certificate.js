@@ -106,10 +106,20 @@ function isIos() {
   return Boolean(navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform));
 }
 
+// see: https://stackoverflow.com/a/32348687/1513045
+function isFacebookBrowser() {
+  const ua = navigator.userAgent || navigator.vendor || window.opera
+  return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1)
+}
+
 function applyDoneAt() {
   const { checked } = $('#check-same-town')
   $('#group-done-at').style.display = checked ? 'none' : 'block';
   $('#field-done-at').disabled = checked;
+}
+
+if (isFacebookBrowser()) {
+  $('#alert-facebook').style.display = 'block';
 }
 
 if (hasProfile()) {
