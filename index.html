@@ -44,6 +44,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
     <link rel="shortcut icon" href="/icons/favicon.ico">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="manifest" href="/pwa.webmanifest">
 </head>
 <body>
     <div class="alert alert-danger" role="alert" style="display: none" id="alert-facebook">
@@ -172,6 +174,24 @@
 
     <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.4.1/dist/pdf-lib.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
-    <script src="certificate.js?v=0a875183a79f21649595712cc4298d7f7e98d976  certificate.js  certificate.js  certificate.js  certificate.js"></script>
+    <script src="certificate.js"></script>
+    <script>
+      // Progressive Web App - Autorise à installer l'application sur mobile
+      // Check compatibility for the browser we're running this in
+      if ("serviceWorker" in navigator) {
+        if (navigator.serviceWorker.controller) {
+          console.log("[PWA Builder] active service worker found, no need to register");
+        } else {
+          // Register the service worker
+          navigator.serviceWorker
+            .register("sw.js", {
+              scope: "./"
+            })
+            .then(function (reg) {
+              console.log("[PWA Builder] Service worker has been registered for scope: " + reg.scope);
+            });
+        }
+      }
+    </script>
 </body>
 </html>
