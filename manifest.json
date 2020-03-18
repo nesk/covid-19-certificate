@@ -1,0 +1,31 @@
+{
+    "short_name" : "Covid-19",
+    "name"  :   "Covid-19 Certificate",
+    "background_color" : "#FFFFFF",
+    "theme_color"   : "#444444",
+    "start_url" : "./",
+    "icons":[
+        {
+            "src":"./images/logo80.png",
+            "sizes":"80x80",
+            "type":"image/png"
+        },
+        {
+            "src":"./images/logo32.png",
+            "sizes":"32x32",
+            "type":"image/png"
+        },
+        {
+            "src":"./images/logo192.png",
+            "sizes":"192x192",
+            "type":"image/png"
+        },
+        {
+            "src":"./images/logo512.png",
+            "sizes":"512x512",
+            "type":"image/png"
+        }
+
+    ],
+    "display":"standalone"
+}
