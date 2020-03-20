@@ -80,8 +80,11 @@ async function generatePdf(profile, reason) {
   }
 
   drawText(profile['done-at'] || profile.town, 375, 140, locationSize)
-  drawText(String((new Date).getDate()), 478, 140)
-  drawText(String((new Date).getMonth() + 1).padStart(2, '0'), 502, 140)
+
+  if (reason !== '') {
+    drawText(String((new Date).getDate()).padStart(2, '0'), 478, 140)
+    drawText(String((new Date).getMonth() + 1).padStart(2, '0'), 502, 140)
+  }
 
   const signatureArrayBuffer = await fetch(profile.signature).then(res => res.arrayBuffer())
   const signatureImage = await pdfDoc.embedPng(signatureArrayBuffer)
