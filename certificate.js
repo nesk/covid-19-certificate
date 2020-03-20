@@ -124,10 +124,6 @@ function restoreReason() {
   $(`#radio-${value}`).checked = true
 }
 
-function isIos() {
-  return Boolean(navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform));
-}
-
 // see: https://stackoverflow.com/a/32348687/1513045
 function isFacebookBrowser() {
   const ua = navigator.userAgent || navigator.vendor || window.opera
@@ -156,10 +152,9 @@ $('#form-profile').addEventListener('submit', event => {
   location.reload()
 })
 
-// We do not want to use a date field on Android, they're unusable, target only iOS devices.
-if (isIos()) {
-  $('#field-birthday').type = 'date'
-}
+$('#date-selector').addEventListener('change', ({ target }) => {
+  $('#field-birthday').value = target.value.split('-').reverse().join('/')
+})
 
 $('#check-same-town').addEventListener('change', applyDoneAt)
 applyDoneAt()
