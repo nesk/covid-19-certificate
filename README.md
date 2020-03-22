@@ -4,3 +4,4 @@ This project was created thanks to open source projects:
 - [Signature Pad](https://github.com/szimek/signature_pad)
 - [Bootstrap](https://getbootstrap.com/)
 - [Font Awesome](https://fontawesome.com/license)
+- [Twemoji](https://twemoji.twitter.com/)
