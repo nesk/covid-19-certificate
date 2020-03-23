@@ -37,7 +37,9 @@ function idealFontSize(font, text, maxWidth, minSize, defaultSize){
 }
 
 async function generatePdf(profile, reason) {
+  const date = new Date()
   const url = 'certificate.pdf'
+  const time = date.getHours()+"h"+date.getMinutes()
   const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
 
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
@@ -82,20 +84,21 @@ async function generatePdf(profile, reason) {
   drawText(profile['done-at'] || profile.town, 375, 140, locationSize)
 
   if (reason !== '') {
-    drawText(String((new Date).getDate()).padStart(2, '0'), 478, 140)
-    drawText(String((new Date).getMonth() + 1).padStart(2, '0'), 502, 140)
+    drawText(String(date.getDate()).padStart(2, '0'), 478, 140)
+    drawText(String(date.getMonth() + 1).padStart(2, '0'), 502, 140)
+    drawText(time.padStart(2, '0'), 478, 122)
   }
 
-  const signatureArrayBuffer = await fetch(profile.signature).then(res => res.arrayBuffer())
-  const signatureImage = await pdfDoc.embedPng(signatureArrayBuffer)
-  const signatureDimensions = signatureImage.scale(1 / (signatureImage.width / 150))
+  // const signatureArrayBuffer = await fetch(profile.signature).then(res => res.arrayBuffer())
+  // const signatureImage = await pdfDoc.embedPng(signatureArrayBuffer)
+  // const signatureDimensions = signatureImage.scale(1 / (signatureImage.width / 150))
 
-  page.drawImage(signatureImage, {
-    x: page.getWidth() - signatureDimensions.width - 100,
-    y: 30,
-    width: signatureDimensions.width,
-    height: signatureDimensions.height,
-  })
+  // page.drawImage(signatureImage, {
+  //   x: page.getWidth() - signatureDimensions.width - 100,
+  //   y: 30,
+  //   width: signatureDimensions.width,
+  //   height: signatureDimensions.height,
+  // })
 
   const pdfBytes = await pdfDoc.save()
   return new Blob([pdfBytes], {type: 'application/pdf'})

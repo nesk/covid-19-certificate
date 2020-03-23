@@ -21,9 +21,17 @@
             padding: 20px;
         }
 
-        h4, form, footer, #alert-print {
+        h1, form, footer, #alert-print {
             margin: 30px auto;
             max-width: 400px;
+        }
+
+        h1 {
+            font-size: larger;
+        }
+
+        h2 {
+            font-size: large;
         }
 
         footer {
@@ -82,137 +90,139 @@
     </style>
 </head>
 <body>
-    <h4>COVID-19 – Générateur d'attestation de déplacement</h4>
-
-    <div class="alert alert-danger" role="alert" id="alert-print">
-        <small>
-            🚨 Les attestations numériques
-            <a href="https://twitter.com/Place_Beauvau/status/1240236276416118784">ne sont plus autorisées</a>,
-            vous pouvez utiliser ce générateur mais vous serez malheureusement obligés d'imprimer.
-        </small>
-    </div>
-
-    <form id="form-profile" style="display: none">
-        <div class="alert alert-primary" role="alert">
+    <div class="container">
+        <h1>COVID-19 – Générateur d'attestation de déplacement</h1>
+        <div class="alert alert-danger" role="alert" id="alert-print">
             <small>
-                <p>
-                    Ce générateur est là pour faciliter l'usage des attestations. Les données sont stockées
-                    <u>exclusivement</u> sur votre téléphone et le code peut être consulté
-                    <a href="https://github.com/nesk/covid-19-certificate">sur Github</a>.
-                </p>
-                <a href="https://www.interieur.gouv.fr/Actualites/L-actu-du-Ministere/Attestation-de-deplacement-derogatoire-et-justificatif-de-deplacement-professionnel">
-                    Plus d'informations sur le site officiel du gouvernement.
-                </a>
+                🚨 Les attestations numériques
+                <a href="https://twitter.com/Place_Beauvau/status/1240236276416118784">ne sont plus autorisées</a>,
+                vous pouvez utiliser ce générateur mais vous serez malheureusement obligés d'imprimer.
             </small>
         </div>
-
-        <h5>Remplissez votre profil</h5>
-
-        <div class="form-group">
-            <label for="field-name">Nom et prénom</label>
-            <input type="text" class="form-control" id="field-name" name="name" autofocus>
-        </div>
-
-        <div class="form-group">
-            <label for="field-birthday">Date de naissance</label>
-            <div class="input-group">
-                <input type="text" class="form-control" id="field-birthday" name="birthday">
-                <div class="input-group-append" id="date-selector-group">
-                    <input type="date" id="date-selector">
-                    <span class="input-group-text text-primary">
-                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="calendar-alt" class="svg-inline--fa fa-calendar-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"></path></svg>
-                    </span>
+        <form id="form-profile" style="display: none">
+            <div class="alert alert-primary" role="alert">
+                <small>
+                    <p>
+                        Ce générateur est là pour faciliter l'usage des attestations. Les données sont stockées
+                        <u>exclusivement</u> sur votre téléphone et le code peut être consulté
+                        <a href="https://github.com/nesk/covid-19-certificate">sur Github</a>.
+                    </p>
+                    <a href="https://www.interieur.gouv.fr/Actualites/L-actu-du-Ministere/Attestation-de-deplacement-derogatoire-et-justificatif-de-deplacement-professionnel">
+                        Plus d'informations sur le site officiel du gouvernement.
+                    </a>
+                </small>
+            </div>
+    
+            <h2>Remplissez votre profil</h2>
+    
+            <div class="form-group">
+                <label for="field-name">Nom et prénom</label>
+                <input type="text" class="form-control" id="field-name" name="name" autofocus>
+            </div>
+    
+            <div class="form-group">
+                <label for="field-birthday">Date de naissance</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="field-birthday" name="birthday">
+                    <div class="input-group-append" id="date-selector-group">
+                        <input type="date" id="date-selector">
+                        <span class="input-group-text text-primary">
+                            <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="calendar-alt" class="svg-inline--fa fa-calendar-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"></path></svg>
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label for="field-address">Adresse</label>
-            <input type="text" class="form-control" id="field-address" name="address">
-        </div>
-
-        <div class="form-group">
-            <label for="field-town">Ville</label>
-            <input type="text" class="form-control" id="field-town" name="town">
-        </div>
-
-        <div class="form-group">
-            <label for="field-zipcode">Code Postal</label>
-            <input type="text" class="form-control" id="field-zipcode" name="zipcode">
-        </div>
-
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="check-same-town" checked>
-            <label class="form-check-label" for="check-same-town">Je réside actuellement à cette adresse</label>
-        </div>
-
-        <div class="form-group" id="group-done-at" style="display: none">
-            <label for="field-done-at">Fait à</label>
-            <input type="text" class="form-control" id="field-done-at" name="done-at" disabled>
-        </div>
-
-        <div class="form-group">
-            <label>Signature</label>
-            <small id="help-signature" class="form-text text-muted">Dessinez votre signature dans la case ci-dessous.</small>
-            <canvas id="field-signature" width=360 height=240 aria-describedby="help-signature"></canvas>
-            <button id="reset-signature" type="button" class="btn btn-link btn-sm float-right">Effacer la signature</button>
+    
+            <div class="form-group">
+                <label for="field-address">Adresse</label>
+                <input type="text" class="form-control" id="field-address" name="address">
+            </div>
+    
+            <div class="form-group">
+                <label for="field-town">Ville</label>
+                <input type="text" class="form-control" id="field-town" name="town">
+            </div>
+    
+            <div class="form-group">
+                <label for="field-zipcode">Code Postal</label>
+                <input type="text" class="form-control" id="field-zipcode" name="zipcode">
+            </div>
+    
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="check-same-town" checked>
+                <label class="form-check-label" for="check-same-town">Je réside actuellement à cette adresse</label>
+            </div>
+    
+            <div class="form-group" id="group-done-at" style="display: none">
+                <label for="field-done-at">Fait à</label>
+                <input type="text" class="form-control" id="field-done-at" name="done-at" disabled>
+            </div>
+    
+            <div class="form-group">
+                <label>Signature</label>
+                <small id="help-signature" class="form-text text-muted">Dessinez votre signature dans la case ci-dessous.</small>
+                <canvas id="field-signature" width=360 height=240 aria-describedby="help-signature"></canvas>
+                <button id="reset-signature" type="button" class="btn btn-link btn-sm float-right">Effacer la signature</button>
+                <br><br>
+            </div>
+    
+            <button type="submit" class="btn btn-primary">Enregistrer mon profil</button>
+        </form>
+    
+        <form id="form-generate" style="display: none">
+            <div class="alert alert-warning" role="alert">
+                <small>
+                    Si vous n'avez pas besoin de sortir, <u>restez chez vous</u> ! Ce générateur est là pour faciliter les
+                    sorties <u>justifiées</u>. Veillez à prendre soin de vous et des autres en limitant la
+                    propagation du virus. 🦠 😷
+                </small>
+            </div>
+    
+            <h2>Choisissez un motif de sortie</h2>
+    
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="field-reason" id="radio-work" value="work" checked>
+                <label class="form-check-label" for="radio-work">Travail</label>
+            </div>
+    
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="field-reason" id="radio-groceries" value="groceries">
+                <label class="form-check-label" for="radio-groceries">Courses</label>
+            </div>
+    
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="field-reason" id="radio-health" value="health">
+                <label class="form-check-label" for="radio-health">Santé</label>
+            </div>
+    
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="field-reason" id="radio-family" value="family">
+                <label class="form-check-label" for="radio-family">Famille</label>
+            </div>
+    
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="field-reason" id="radio-sport" value="sport">
+                <label class="form-check-label" for="radio-sport">Sport &amp; animaux</label>
+            </div>
+    
+            <hr>
+    
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="field-reason" id="radio-none" value="">
+                <label class="form-check-label" for="radio-none">Aucun (remplissage manuel)</label>
+            </div>
+    
             <br><br>
-        </div>
+            <button type="submit" class="btn btn-primary">Générer mon attestation</button>
+    
+            <br><br>
+            <button type="button" class="btn btn-link btn-sm" onclick="localStorage.clear(); location.reload()">
+                Effacer mon profil
+            </button>
+        </form>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Enregistrer mon profil</button>
-    </form>
 
-    <form id="form-generate" style="display: none">
-        <div class="alert alert-warning" role="alert">
-            <small>
-                Si vous n'avez pas besoin de sortir, <u>restez chez vous</u> ! Ce générateur est là pour faciliter les
-                sorties <u>justifiées</u>. Veillez à prendre soin de vous et des autres en limitant la
-                propagation du virus. 🦠 😷
-            </small>
-        </div>
-
-        <h5>Choisissez un motif de sortie</h5>
-
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="field-reason" id="radio-work" value="work" checked>
-            <label class="form-check-label" for="radio-work">Travail</label>
-        </div>
-
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="field-reason" id="radio-groceries" value="groceries">
-            <label class="form-check-label" for="radio-groceries">Courses</label>
-        </div>
-
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="field-reason" id="radio-health" value="health">
-            <label class="form-check-label" for="radio-health">Santé</label>
-        </div>
-
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="field-reason" id="radio-family" value="family">
-            <label class="form-check-label" for="radio-family">Famille</label>
-        </div>
-
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="field-reason" id="radio-sport" value="sport">
-            <label class="form-check-label" for="radio-sport">Sport &amp; animaux</label>
-        </div>
-
-        <hr>
-
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="field-reason" id="radio-none" value="">
-            <label class="form-check-label" for="radio-none">Aucun (remplissage manuel)</label>
-        </div>
-
-        <br><br>
-        <button type="submit" class="btn btn-primary">Générer mon attestation</button>
-
-        <br><br>
-        <button type="button" class="btn btn-link btn-sm" onclick="localStorage.clear(); location.reload()">
-            Effacer mon profil
-        </button>
-    </form>
 
     <footer class="footer text-center">
         <small>
