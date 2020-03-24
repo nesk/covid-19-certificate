@@ -25,17 +25,6 @@ function getProfile() {
   return fields
 }
 
-function idealFontSize(font, text, maxWidth, minSize, defaultSize){
-  let currentSize = defaultSize;
-  let textWidth = font.widthOfTextAtSize(text, defaultSize);
-
-  while (textWidth > maxWidth && currentSize > minSize){
-    textWidth = font.widthOfTextAtSize(text, --currentSize);
-  }
-
-  return (textWidth > maxWidth) ? null : currentSize;
-}
-
 async function generatePdf(profile, reason) {
   const url = 'certificate.pdf'
   const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
@@ -71,15 +60,7 @@ async function generatePdf(profile, reason) {
       break
   }
 
-  let locationSize = idealFontSize(font, profile['done-at'] || profile.town, 83, 7, 11);
-
-  if (!locationSize){
-    alert('Le nom de la ville risque de ne pas être affiché correctement en raison de sa longueur. ' +
-      'Essayez d\'utiliser des abréviations ("Saint" en "St." par exemple) quand cela est possible.');
-    locationSize = 7;
-  }
-
-  drawText(profile['done-at'] || profile.town, 375, 140, locationSize)
+  drawText(profile['done-at'] || profile.town, 375, 140)
 
   if (reason !== '') {
     drawText(String((new Date).getDate()).padStart(2, '0'), 478, 140)
