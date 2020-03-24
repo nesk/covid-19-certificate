@@ -2,7 +2,6 @@ const { PDFDocument, StandardFonts } = PDFLib
 
 const $ = (...args) => document.querySelector(...args)
 const $$ = (...args) => document.querySelectorAll(...args)
-const signaturePad = new SignaturePad($('#field-signature'), { minWidth: 1, maxWidth: 3 })
 
 const generateQR = async text => {
   try {
@@ -21,7 +20,6 @@ function saveProfile() {
     localStorage.setItem(field.id.substring('field-'.length), field.value)
   }
 
-  localStorage.setItem('signature', signaturePad.toDataURL())
 }
 
 function getProfile() {
@@ -98,25 +96,14 @@ async function generatePdf(profile, reason) {
     drawText(time.padStart(2, '0'), 478, 123)
   }
 
-  const signatureArrayBuffer = await fetch(profile.signature).then(res => res.arrayBuffer())
-  const signatureImage = await pdfDoc.embedPng(signatureArrayBuffer)
-  const signatureDimensions = signatureImage.scale(1 / (signatureImage.width / 150))
-
   const generatedQR = await generateQR(data)
   const qrImage = await pdfDoc.embedPng(generatedQR)
 
   page.drawImage(qrImage, {
-    x: page.getWidth() - signatureDimensions.width - 200,
+    x: page.getWidth() - 400,
     y: 30,
     width: 100,
     height: 100,
-  })
-
-  page.drawImage(signatureImage, {
-    x: page.getWidth() - signatureDimensions.width - 100,
-    y: 30,
-    width: signatureDimensions.width,
-    height: signatureDimensions.height,
   })
 
   const pdfBytes = await pdfDoc.save()
@@ -161,10 +148,6 @@ $('#check-same-town').addEventListener('change', applyDoneAt)
 applyDoneAt()
 
 const formWidth = $('#form-profile').offsetWidth
-$('#field-signature').width = formWidth
-$('#field-signature').height = formWidth / 1.5
-
-$('#reset-signature').addEventListener('click', () => signaturePad.clear())
 
 $('#form-profile').addEventListener('submit', async event => {
   event.preventDefault()
