@@ -86,7 +86,7 @@ async function generatePdf(profile, reason) {
   if (reason !== '') {
     drawText(String(date.getDate()).padStart(2, '0'), 478, 140)
     drawText(String(date.getMonth() + 1).padStart(2, '0'), 502, 140)
-    drawText(time.padStart(2, '0'), 478, 122)
+    drawText(time.padStart(2, '0'), 478, 123)
   }
 
   // const signatureArrayBuffer = await fetch(profile.signature).then(res => res.arrayBuffer())
