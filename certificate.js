@@ -37,34 +37,43 @@ async function generatePdf(profile, reason) {
     page.drawText(text, {x, y, size, font})
   }
 
-  drawText(profile.name, 135, 622)
-  drawText(profile.birthday, 135, 593)
-  drawText(profile.address, 135, 559)
-  drawText(`${profile.zipcode} ${profile.town}`, 135, 544)
+  drawText(profile.name, 125, 636)
+  drawText(profile.birthday, 125, 612)
+  drawText(`${profile.address} ${profile.zipcode} ${profile.town}`, 143, 588)
 
   switch (reason) {
     case 'work':
-      drawText('x', 51, 425, 17)
+      drawText('x', 77, 492, 25)
       break
     case 'groceries':
-      drawText('x', 51, 350, 17)
+      drawText('x', 77, 433, 25)
       break
     case 'health':
-      drawText('x', 51, 305, 17)
+      drawText('x', 77, 401, 25)
       break
     case 'family':
-      drawText('x', 51, 274, 17)
+      drawText('x', 77, 371, 25)
       break
     case 'sport':
-      drawText('x', 51, 229, 17)
+      drawText('x', 77, 335, 25)
       break
   }
 
-  drawText(profile['done-at'] || profile.town, 375, 140)
+  drawText(profile['done-at'] || profile.town, 120, 283)
 
   if (reason !== '') {
-    drawText(String((new Date).getDate()).padStart(2, '0'), 478, 140)
-    drawText(String((new Date).getMonth() + 1).padStart(2, '0'), 502, 140)
+    const date = [
+      String((new Date).getDate()).padStart(2, '0'),
+      String((new Date).getMonth() + 1).padStart(2, '0'),
+      String((new Date).getFullYear()),
+    ].join('/')
+
+    const time = [
+      String((new Date).getHours()).padStart(2, '0'),
+      String(Math.floor((new Date).getMinutes() / 5) * 5).padStart(2, '0'), // Round the minutes to lower X0 or X5 value
+    ].join('h')
+
+    drawText(`${date} à ${time}`, 110, 259)
   }
 
   const signatureArrayBuffer = await fetch(profile.signature).then(res => res.arrayBuffer())
@@ -72,8 +81,8 @@ async function generatePdf(profile, reason) {
   const signatureDimensions = signatureImage.scale(1 / (signatureImage.width / 150))
 
   page.drawImage(signatureImage, {
-    x: page.getWidth() - signatureDimensions.width - 100,
-    y: 30,
+    x: 130,
+    y: 100,
     width: signatureDimensions.width,
     height: signatureDimensions.height,
   })
