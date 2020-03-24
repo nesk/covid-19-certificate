@@ -103,7 +103,7 @@
             </small>
         </div>
 
-        <form id="form-profile" style="display: none">
+        <form id="form-profile">
             <div class="alert alert-primary" role="alert">
                 <small>
                     <p>
@@ -170,18 +170,6 @@
                 <br><br>
             </div>
 
-            <button type="submit" class="btn btn-primary">Enregistrer mon profil</button>
-        </form>
-
-        <form id="form-generate" style="display: none">
-            <div class="alert alert-warning" role="alert">
-                <small>
-                    Si vous n'avez pas besoin de sortir, <u>restez chez vous</u> ! Ce générateur est là pour faciliter les
-                    sorties <u>justifiées</u>. Veillez à prendre soin de vous et des autres en limitant la
-                    propagation du virus. 🦠 😷
-                </small>
-            </div>
-
             <h5>Choisissez un motif de sortie</h5>
 
             <div class="form-check">
@@ -219,10 +207,6 @@
             <br><br>
             <button type="submit" class="btn btn-primary">Générer mon attestation</button>
 
-            <br><br>
-            <button type="button" class="btn btn-link btn-sm" onclick="localStorage.clear(); location.reload()">
-                Effacer mon profil
-            </button>
         </form>
     </div>
 

@@ -137,15 +137,6 @@ function getAndSaveReason() {
   return value
 }
 
-function restoreReason() {
-  const value = localStorage.getItem('last-reason')
-  if (value === null) {
-    return
-  }
-
-  $(`#radio-${value}`).checked = true
-}
-
 // see: https://stackoverflow.com/a/32348687/1513045
 function isFacebookBrowser() {
   const ua = navigator.userAgent || navigator.vendor || window.opera
@@ -162,18 +153,6 @@ if (isFacebookBrowser()) {
   $('#alert-facebook').style.display = 'block';
 }
 
-if (hasProfile()) {
-  $('#form-generate').style.display = 'block'
-} else {
-  $('#form-profile').style.display = 'block'
-}
-
-$('#form-profile').addEventListener('submit', event => {
-  event.preventDefault()
-  saveProfile()
-  location.reload()
-})
-
 $('#date-selector').addEventListener('change', ({ target }) => {
   $('#field-birthday').value = target.value.split('-').reverse().join('/')
 })
@@ -187,11 +166,10 @@ $('#field-signature').height = formWidth / 1.5
 
 $('#reset-signature').addEventListener('click', () => signaturePad.clear())
 
-$('#form-generate').addEventListener('submit', async event => {
+$('#form-profile').addEventListener('submit', async event => {
   event.preventDefault()
+  saveProfile()
   const reason = getAndSaveReason()
   const pdfBlob = await generatePdf(getProfile(), reason)
   downloadBlob(pdfBlob, 'attestation.pdf')
 })
-
-restoreReason()
