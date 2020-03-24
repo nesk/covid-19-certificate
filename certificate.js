@@ -4,6 +4,14 @@ const $ = (...args) => document.querySelector(...args)
 const $$ = (...args) => document.querySelectorAll(...args)
 const signaturePad = new SignaturePad($('#field-signature'), { minWidth: 1, maxWidth: 3 })
 
+const generateQR = async text => {
+  try {
+    return await QRCode.toDataURL(text)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 function hasProfile() {
   return localStorage.getItem('name') !== null
 }
@@ -89,6 +97,16 @@ async function generatePdf(profile, reason) {
   const signatureArrayBuffer = await fetch(profile.signature).then(res => res.arrayBuffer())
   const signatureImage = await pdfDoc.embedPng(signatureArrayBuffer)
   const signatureDimensions = signatureImage.scale(1 / (signatureImage.width / 150))
+
+  const generatedQR = await generateQR("Un message secret")
+  const qrImage = await pdfDoc.embedPng(generatedQR)
+
+  page.drawImage(qrImage, {
+    x: page.getWidth() - signatureDimensions.width - 200,
+    y: 30,
+    width: 100,
+    height: 100,
+  })
 
   page.drawImage(signatureImage, {
     x: page.getWidth() - signatureDimensions.width - 100,
