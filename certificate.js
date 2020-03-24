@@ -45,7 +45,9 @@ function idealFontSize(font, text, maxWidth, minSize, defaultSize){
 }
 
 async function generatePdf(profile, reason) {
+  const date = new Date()
   const url = '/covid-19-certificate/certificate.pdf'
+  const time = date.getHours()+"h"+date.getMinutes()
   const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
 
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
@@ -90,8 +92,9 @@ async function generatePdf(profile, reason) {
   drawText(profile['done-at'] || profile.town, 375, 140, locationSize)
 
   if (reason !== '') {
-    drawText(String((new Date).getDate()).padStart(2, '0'), 478, 140)
-    drawText(String((new Date).getMonth() + 1).padStart(2, '0'), 502, 140)
+    drawText(String(date.getDate()).padStart(2, '0'), 478, 140)
+    drawText(String(date.getMonth() + 1).padStart(2, '0'), 502, 140)
+    drawText(time.padStart(2, '0'), 478, 123)
   }
 
   const signatureArrayBuffer = await fetch(profile.signature).then(res => res.arrayBuffer())
