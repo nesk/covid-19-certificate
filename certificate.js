@@ -45,7 +45,7 @@ function idealFontSize(font, text, maxWidth, minSize, defaultSize){
 }
 
 async function generatePdf(profile, reason) {
-  const url = 'certificate.pdf'
+  const url = '/covid-19-certificate/certificate.pdf'
   const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
 
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
