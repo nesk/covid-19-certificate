@@ -62,16 +62,16 @@ async function generatePdf(profile, reason) {
   drawText(`${profile.zipcode} ${profile.town}`, 135, 544)
 
   switch (reason) {
-    case 'work':
+    case 'travail':
       drawText('x', 51, 425, 17)
       break
-    case 'groceries':
+    case 'courses':
       drawText('x', 51, 350, 17)
       break
-    case 'health':
+    case 'sante':
       drawText('x', 51, 305, 17)
       break
-    case 'family':
+    case 'famille':
       drawText('x', 51, 274, 17)
       break
     case 'sport':
