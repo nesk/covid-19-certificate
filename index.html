@@ -2,7 +2,6 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <base href="https://cristianpb.github.io/covid-19-certificate">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="msapplication-TileColor" content="#603cba">
     <meta name="msapplication-config" content="./favicons/browserconfig.xml">
@@ -13,83 +12,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./favicons/favicon-16x16.png">
     <link rel="manifest" href="./favicons/site.webmanifest">
     <link rel="mask-icon" href="./favicons/safari-pinned-tab.svg" color="#21bf73">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>COVID-19 – Générateur d'attestation de déplacement</title>
-
-    <style>
-        body {
-            padding: 20px;
-        }
-
-        h1, form, footer, #alert-print {
-            margin: 30px auto;
-            max-width: 400px;
-        }
-
-        h1 {
-            font-size: larger;
-        }
-
-        h2 {
-            font-size: large;
-        }
-
-
-        footer {
-            margin-top: 40px;
-        }
-
-        canvas {
-            border: 1px solid #ced4da;
-            border-radius: .25rem;
-        }
-
-        #form-profile .form-check {
-            margin-bottom: 1rem;
-        }
-
-        #form-profile .form-check-label {
-            font-size: 80%;
-            font-weight: 400;
-            transform: translateY(-2px);
-        }
-
-        #form-generate .form-check {
-            margin: 10px;
-        }
-
-        #alert-facebook {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-        }
-
-        #alert-print {
-            margin: 1rem auto 0;
-        }
-
-        #date-selector-group {
-            position: relative;
-            overflow: hidden;
-        }
-
-        #date-selector {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            height: 100%;
-            transform: translateX(-50%); /* center the input to avoid reset buttons */
-            opacity: 0;
-            z-index: 1;
-            cursor: pointer;
-        }
-
-        svg {
-            height: 1em;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -207,8 +131,6 @@
         sein de ce navigateur ! Merci d'ouvrir Chrome sur Android ou bien Safari sur iOS.
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.4.1/dist/pdf-lib.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
-    <script src="/covid-19-certificate/certificate.js"></script>
+    <script src="./certificate.js"></script>
 </body>
 </html>

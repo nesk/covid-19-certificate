@@ -1,0 +1,71 @@
+body {
+    padding: 20px;
+}
+
+h1, form, footer, #alert-print {
+    margin: 30px auto;
+    max-width: 400px;
+}
+
+h1 {
+    font-size: larger;
+}
+
+h2 {
+    font-size: large;
+}
+
+
+footer {
+    margin-top: 40px;
+}
+
+canvas {
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+#form-profile .form-check {
+    margin-bottom: 1rem;
+}
+
+#form-profile .form-check-label {
+    font-size: 80%;
+    font-weight: 400;
+    transform: translateY(-2px);
+}
+
+#form-generate .form-check {
+    margin: 10px;
+}
+
+#alert-facebook {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+}
+
+#alert-print {
+    margin: 1rem auto 0;
+}
+
+#date-selector-group {
+    position: relative;
+    overflow: hidden;
+}
+
+#date-selector {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    transform: translateX(-50%); /* center the input to avoid reset buttons */
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+
+svg {
+    height: 1em;
+}
