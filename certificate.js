@@ -46,8 +46,9 @@ function idealFontSize(font, text, maxWidth, minSize, defaultSize){
 
 async function generatePdf(profile, reason) {
   const date = new Date()
+  const time = date.getHours()+"h"+(date.getMinutes()<10?'0':'')+date.getMinutes()
+  const data = "Nom/Prénom: "+profile.name+" ; Date de naissance: "+profile.birthday+" ; lieu : "+profile.address+" "+profile.zipcode+" "+profile.town+" ; Heure : "+time
   const url = '/covid-19-certificate/certificate.pdf'
-  const time = date.getHours()+"h"+date.getMinutes()
   const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
 
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
@@ -101,7 +102,7 @@ async function generatePdf(profile, reason) {
   const signatureImage = await pdfDoc.embedPng(signatureArrayBuffer)
   const signatureDimensions = signatureImage.scale(1 / (signatureImage.width / 150))
 
-  const generatedQR = await generateQR("Un message secret")
+  const generatedQR = await generateQR(data)
   const qrImage = await pdfDoc.embedPng(generatedQR)
 
   page.drawImage(qrImage, {
