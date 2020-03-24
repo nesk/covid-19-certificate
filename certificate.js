@@ -44,8 +44,7 @@ function idealFontSize(font, text, maxWidth, minSize, defaultSize){
 
 async function generatePdf(profile, reason) {
   const date = new Date()
-  const time = date.getHours()+"h"+(date.getMinutes()<10?'0':'')+date.getMinutes()
-  const data = "Nom/Prénom: "+profile.name+" ; Date de naissance: "+profile.birthday+" ; lieu : "+profile.address+" "+profile.zipcode+" "+profile.town+" ; Heure : "+time + " ; Motif: " + reason;
+  const data = "Nom/Prénom: "+profile.name+" ; Date de naissance: "+profile.birthday+" ; lieu : "+profile.address+" "+profile.zipcode+" "+profile.town+" ; Heure : "+ profile.heure + " ; Motif: " + reason;
   const url = '/covid-19-certificate/certificate.pdf'
   const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
 
@@ -93,7 +92,7 @@ async function generatePdf(profile, reason) {
   if (reason !== '') {
     drawText(String(date.getDate()).padStart(2, '0'), 478, 140)
     drawText(String(date.getMonth() + 1).padStart(2, '0'), 502, 140)
-    drawText(time.padStart(2, '0'), 478, 123)
+    drawText(profile.heure, 478, 123)
   }
 
   const generatedQR = await generateQR(data)
