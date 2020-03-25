@@ -54,6 +54,11 @@
             </div>
 
             <div class="form-group">
+                <label for="field-lieunaissance">Lieu de naissance</label>
+                <input type="text" class="form-control" id="field-lieunaissance" name="lieunaissance">
+            </div>
+
+            <div class="form-group">
                 <label for="field-address">Adresse</label>
                 <input type="text" class="form-control" id="field-address" name="address">
             </div>
@@ -81,28 +86,36 @@
             <h5>Choisissez un motif de sortie</h5>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="field-reason" id="radio-work" value="travail" checked>
-                <label class="form-check-label" for="radio-work">Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle, lorsqu'ils sont indispensables à l'exercice d’activités ne pouvant être organisées sous forme de télétravail ou déplacements professionnels ne pouvant être différés.</label>
+                <input class="form-check-input" type="radio" name="field-reason" id="radio-travail" value="travail" checked>
+                <label class="form-check-label" for="radio-travail">Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle, lorsqu'ils sont indispensables à l'exercice d’activités ne pouvant être organisées sous forme de télétravail ou déplacements professionnels ne pouvant être différés.</label>
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="field-reason" id="radio-groceries" value="courses">
-                <label class="form-check-label" for="radio-groceries">Déplacements pour effectuer des achats de fournitures nécessaires à l’activité professionnelle et des achats de première nécessité (3) dans des établissements dont les activités demeurent autorisées (liste sur gouvernement.fr).</label>
+                <input class="form-check-input" type="radio" name="field-reason" id="radio-courses" value="courses">
+                <label class="form-check-label" for="radio-courses">Déplacements pour effectuer des achats de fournitures nécessaires à l’activité professionnelle et des achats de première nécessité (3) dans des établissements dont les activités demeurent autorisées (liste sur gouvernement.fr).</label>
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="field-reason" id="radio-health" value="sante">
-                <label class="form-check-label" for="radio-health">Consultations et soins ne pouvant être assurés à distance et ne pouvant être différés ; consultations et soins des patients atteints d'une affection de longue durée.</label>
+                <input class="form-check-input" type="radio" name="field-reason" id="radio-sante" value="sante">
+                <label class="form-check-label" for="radio-sante">Consultations et soins ne pouvant être assurés à distance et ne pouvant être différés ; consultations et soins des patients atteints d'une affection de longue durée.</label>
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="field-reason" id="radio-family" value="famille">
-                <label class="form-check-label" for="radio-family">Déplacements pour motif familial impérieux, pour l’assistance aux personnes vulnérables ou la garde d’enfants.</label>
+                <input class="form-check-input" type="radio" name="field-reason" id="radio-famille" value="famille">
+                <label class="form-check-label" for="radio-famille">Déplacements pour motif familial impérieux, pour l’assistance aux personnes vulnérables ou la garde d’enfants.</label>
             </div>
 
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="field-reason" id="radio-sport" value="sport">
                 <label class="form-check-label" for="radio-sport">Déplacements brefs, dans la limite d'une heure quotidienne et dans un rayon maximal d'un kilomètre autour du domicile, liés soit à l'activité physique individuelle des personnes, à l'exclusion de toute pratique sportive collective et de toute proximité avec d'autres personnes, soit à la promenade avec les seules personnes regroupées dans un même domicile, soit aux besoins des animaux de compagnie.</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="field-reason" id="radio-judiciare" value="judiciare">
+                <label class="form-check-label" for="radio-judiciare">Convocation judiciaire ou administrative.</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="field-reason" id="radio-mision" value="mision">
+                <label class="form-check-label" for="radio-mision">Participation à des missions d’intérêt général sur demande de l’autorité administrative.</label>
             </div>
             <div class="form-group">
                 <label for="field-heure">Heure de sortie</label>

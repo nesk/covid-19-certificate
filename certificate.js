@@ -57,27 +57,32 @@ async function generatePdf(profile, reason) {
     page.drawText(text, {x, y, size, font})
   }
   
-  drawText(profile.name, 135, 622)
-  drawText(profile.birthday, 135, 593)
-  drawText(profile.address, 135, 559)
-  drawText(`${profile.zipcode} ${profile.town}`, 135, 544)
-  
+  drawText(profile.name, 125, 665)
+  drawText(profile.birthday, 125, 652)
+  drawText(profile.lieunaissance, 125, 640)
+  drawText(`${profile.address} ${profile.zipcode} ${profile.town}`, 140, 628)
 
   switch (reason) {
     case 'travail':
-      drawText('x', 51, 425, 17)
+      drawText('x', 74, 558, 17)
       break
     case 'courses':
-      drawText('x', 51, 350, 17)
+      drawText('x', 74, 510, 17)
       break
     case 'sante':
-      drawText('x', 51, 305, 17)
+      drawText('x', 74, 464, 17)
       break
     case 'famille':
-      drawText('x', 51, 274, 17)
+      drawText('x', 74, 430, 17)
       break
     case 'sport':
-      drawText('x', 51, 229, 17)
+      drawText('x', 74, 395, 17)
+      break
+    case 'judiciare':
+      drawText('x', 74, 325, 17)
+      break
+    case 'mision':
+      drawText('x', 74, 301, 17)
       break
   }
   let locationSize = idealFontSize(font, profile['done-at'] || profile.town, 83, 7, 11);
@@ -88,12 +93,12 @@ async function generatePdf(profile, reason) {
     locationSize = 7;
   }
 
-  drawText(profile['done-at'] || profile.town, 375, 140, locationSize)
+  drawText(profile['done-at'] || profile.town, 111, 256, locationSize)
 
   if (reason !== '') {
-    drawText(String(date.getDate()).padStart(2, '0'), 478, 140)
-    drawText(String(date.getMonth() + 1).padStart(2, '0'), 502, 140)
-    drawText(profile.heure, 478, 123)
+    drawText(`${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}`, 100, 232)
+    drawText(profile.heure.substring(0, 2), 217, 232)
+    drawText(profile.heure.substring(3, 5), 236, 232)
   }
 
   const generatedQR = await generateQR(data)
@@ -101,8 +106,8 @@ async function generatePdf(profile, reason) {
   const qrImage = await pdfDoc.embedPng(generatedQR)
   
   page.drawImage(qrImage, {
-    x: page.getWidth() - 400,
-    y: 30,
+    x: page.getWidth() - 170,
+    y: 170,
     width: 100,
     height: 100,
   })
