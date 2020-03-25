@@ -78,10 +78,10 @@ async function generatePdf(profile, reason) {
     case 'sport':
       drawText('x', 76, 345, 19)
       break
-    case 'judiciare':
+    case 'judiciaire':
       drawText('x', 76, 298, 19)
       break
-    case 'mision':
+    case 'missions':
       drawText('x', 76, 260, 19)
       break
   }
