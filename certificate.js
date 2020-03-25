@@ -48,19 +48,20 @@ async function generatePdf(profile, reason) {
   const date = new Date()
   const data = `Nom/Prenom: ${profile.name}; Date de naissance: ${profile.birthday}; Lieu: ${profile.address} ${profile.zipcode} ${profile.town}; Heure: ${profile.heure}; Motif: ${reason}`;
   const existingPdfBytes = await fetch(pdfBase).then(res => res.arrayBuffer())
-
+  
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
   const page = pdfDoc.getPages()[0]
-
+  
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
   const drawText = (text, x, y, size = 11) => {
     page.drawText(text, {x, y, size, font})
   }
-
+  
   drawText(profile.name, 135, 622)
   drawText(profile.birthday, 135, 593)
   drawText(profile.address, 135, 559)
   drawText(`${profile.zipcode} ${profile.town}`, 135, 544)
+  
 
   switch (reason) {
     case 'travail':
@@ -79,7 +80,6 @@ async function generatePdf(profile, reason) {
       drawText('x', 51, 229, 17)
       break
   }
-
   let locationSize = idealFontSize(font, profile['done-at'] || profile.town, 83, 7, 11);
 
   if (!locationSize){
@@ -97,16 +97,18 @@ async function generatePdf(profile, reason) {
   }
 
   const generatedQR = await generateQR(data)
+  
   const qrImage = await pdfDoc.embedPng(generatedQR)
-
+  
   page.drawImage(qrImage, {
     x: page.getWidth() - 400,
     y: 30,
     width: 100,
     height: 100,
   })
-
+  
   const pdfBytes = await pdfDoc.save()
+  
   return new Blob([pdfBytes], {type: 'application/pdf'})
 }
 
@@ -115,6 +117,7 @@ function downloadBlob(blob, fileName) {
   var url = URL.createObjectURL(blob)
   link.href = url
   link.download = fileName
+  document.body.appendChild(link)
   link.click()
 }
 
