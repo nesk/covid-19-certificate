@@ -57,32 +57,32 @@ async function generatePdf(profile, reason) {
     page.drawText(text, {x, y, size, font})
   }
   
-  drawText(profile.name, 125, 665)
-  drawText(profile.birthday, 125, 652)
-  drawText(profile.lieunaissance, 125, 640)
-  drawText(`${profile.address} ${profile.zipcode} ${profile.town}`, 140, 628)
+  drawText(profile.name, 123, 686)
+  drawText(profile.birthday, 123, 661)
+  drawText(profile.lieunaissance, 92, 638)
+  drawText(`${profile.address} ${profile.zipcode} ${profile.town}`, 134, 613)
 
   switch (reason) {
     case 'travail':
-      drawText('x', 74, 558, 17)
+      drawText('x', 76, 527, 19)
       break
     case 'courses':
-      drawText('x', 74, 510, 17)
+      drawText('x', 76, 478, 19)
       break
     case 'sante':
-      drawText('x', 74, 464, 17)
+      drawText('x', 76, 436, 19)
       break
     case 'famille':
-      drawText('x', 74, 430, 17)
+      drawText('x', 76, 400, 19)
       break
     case 'sport':
-      drawText('x', 74, 395, 17)
+      drawText('x', 76, 345, 19)
       break
     case 'judiciare':
-      drawText('x', 74, 325, 17)
+      drawText('x', 76, 298, 19)
       break
     case 'mision':
-      drawText('x', 74, 301, 17)
+      drawText('x', 76, 260, 19)
       break
   }
   let locationSize = idealFontSize(font, profile['done-at'] || profile.town, 83, 7, 11);
@@ -93,12 +93,12 @@ async function generatePdf(profile, reason) {
     locationSize = 7;
   }
 
-  drawText(profile['done-at'] || profile.town, 111, 256, locationSize)
+  drawText(profile['done-at'] || profile.town, 111, 226, locationSize)
 
   if (reason !== '') {
-    drawText(`${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}`, 100, 232)
-    drawText(profile.heure.substring(0, 2), 217, 232)
-    drawText(profile.heure.substring(3, 5), 236, 232)
+    drawText(`${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}`, 92, 200)
+    drawText(profile.heure.substring(0, 2), 201, 200)
+    drawText(profile.heure.substring(3, 5), 220, 200)
   }
 
   const generatedQR = await generateQR(data)
@@ -107,7 +107,7 @@ async function generatePdf(profile, reason) {
   
   page.drawImage(qrImage, {
     x: page.getWidth() - 170,
-    y: 170,
+    y: 140,
     width: 100,
     height: 100,
   })
