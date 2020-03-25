@@ -6,9 +6,10 @@
   "scripts": {
     "start": "parcel index.html",
     "prebuild": "rimraf dist",
-    "build": "parcel build index.html",
+    "build": "parcel build --public-url /covid-19-certificate index.html",
     "postbuild": "react-snap"
   },
+  "homepage": "https://cristianpb.github.io/covid-19-certificate/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cristianpb/covid-19-certificate.git"
