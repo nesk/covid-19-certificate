@@ -39,7 +39,7 @@ async function generatePdf(profile, reason) {
 
   drawText(profile.name, 125, 685)
   drawText(profile.birthday, 125, 661)
-  drawText(profile.birthplace, 95, 637)
+  drawText(profile.birthplace || '', 95, 637)
   drawText(`${profile.address} ${profile.zipcode} ${profile.town}`, 140, 613)
 
   switch (reason) {
@@ -165,7 +165,21 @@ $('#reset-signature').addEventListener('click', () => signaturePad.clear())
 $('#form-generate').addEventListener('submit', async event => {
   event.preventDefault()
   const reason = getAndSaveReason()
-  const pdfBlob = await generatePdf(getProfile(), reason)
+  const profile = getProfile()
+
+  if (profile.birthplace === undefined) {
+    const birthplace = prompt([
+      `La nouvelle attestation, en date du 25 mars, exige maintenant le lieu de naissance et votre profil ne contient`,
+      `actuellement pas cette information, merci de compléter :`,
+    ].join(' '))
+
+    if (birthplace) {
+      profile.birthplace = birthplace
+      localStorage.setItem('birthplace', birthplace)
+    }
+  }
+
+  const pdfBlob = await generatePdf(profile, reason)
   downloadBlob(pdfBlob, 'attestation.pdf')
 })
 
