@@ -17,10 +17,6 @@ const generateQR = async text => {
   }
 }
 
-function hasProfile() {
-  return localStorage.getItem('name') !== null
-}
-
 function saveProfile() {
   for (const field of $$('#form-profile input:not([disabled]):not([type=checkbox])')) {
     localStorage.setItem(field.id.substring('field-'.length), field.value)
@@ -50,7 +46,7 @@ function idealFontSize(font, text, maxWidth, minSize, defaultSize){
 
 async function generatePdf(profile, reason) {
   const date = new Date()
-  const data = "Nom/Prénom: "+profile.name+" ; Date de naissance: "+profile.birthday+" ; lieu : "+profile.address+" "+profile.zipcode+" "+profile.town+" ; Heure : "+ profile.heure + " ; Motif: " + reason;
+  const data = `Nom/Prenom: ${profile.name}; Date de naissance: ${profile.birthday}; Lieu: ${profile.address} ${profile.zipcode} ${profile.town}; Heure: ${profile.heure}; Motif: ${reason}`;
   const existingPdfBytes = await fetch(pdfBase).then(res => res.arrayBuffer())
 
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
@@ -150,8 +146,6 @@ $('#date-selector').addEventListener('change', ({ target }) => {
 
 $('#check-same-town').addEventListener('change', applyDoneAt)
 applyDoneAt()
-
-const formWidth = $('#form-profile').offsetWidth
 
 $('#form-profile').addEventListener('submit', async event => {
   event.preventDefault()
