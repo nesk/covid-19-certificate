@@ -46,7 +46,7 @@ function idealFontSize(font, text, maxWidth, minSize, defaultSize){
 
 async function generatePdf(profile, reason) {
   const date = new Date()
-  const data = `Nom/Prenom: ${profile.name}; Date de naissance: ${profile.birthday}; Lieu: ${profile.address} ${profile.zipcode} ${profile.town}; Heure: ${profile.heure}; Motif: ${reason}`;
+  const data = `Nom/Prenom: ${profile.name}; Date de naissance: ${profile.birthday}; Lieu de naissance: ${profile.lieunaissance}; Adresse: ${profile.address} ${profile.zipcode} ${profile.town}; Heure sortie: ${profile.heure}; Heure creation: ${date.getHours}h${date.getMinutes()}; Motif: ${reason}`;
   const existingPdfBytes = await fetch(pdfBase).then(res => res.arrayBuffer())
   
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
