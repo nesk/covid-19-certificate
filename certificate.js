@@ -97,8 +97,8 @@ async function generatePdf(profile, reason) {
 
   if (reason !== '') {
     drawText(`${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}`, 92, 200)
-    drawText(profile.heure.substring(0, 2), 201, 200)
-    drawText(profile.heure.substring(3, 5), 220, 200)
+    drawText(profile.heure.substring(0, 2), 200, 201)
+    drawText(profile.heure.substring(3, 5), 220, 201)
   }
 
   const generatedQR = await generateQR(data)
