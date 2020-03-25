@@ -77,7 +77,10 @@ async function generatePdf(profile, reason) {
 
     drawText(date, 105, 201)
     drawText(String((new Date).getHours()).padStart(2, '0'), 195, 201)
-    drawText(String((new Date).getMinutes()).padStart(2, '0'), 225, 201)
+
+    // Round the minutes to the lower X0 or X5 value, so it feels more human.
+    const minutes = Math.floor((new Date).getMinutes() / 5) * 5;
+    drawText(String(minutes).padStart(2, '0'), 225, 201)
   }
 
   const signatureArrayBuffer = await fetch(profile.signature).then(res => res.arrayBuffer())
