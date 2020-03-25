@@ -48,14 +48,15 @@ async function generatePdf(profile, reason) {
     page.drawText(text, {x, y, size, font})
   }
 
-  drawText(profile.name, 135, 622)
-  drawText(profile.birthday, 135, 593)
-  drawText(profile.address, 135, 559)
-  drawText(`${profile.zipcode} ${profile.town}`, 135, 544)
+  drawText(profile.name, 135, 685)
+  drawText(profile.birthday, 135, 661)
+  drawText(profile.birthplace, 100, 637)
+  drawText(profile.address, 135, 616)
+  drawText(`${profile.zipcode} ${profile.town}`, 135, 604)
 
   switch (reason) {
     case 'work':
-      drawText('x', 51, 425, 17)
+      drawText('x', 77, 535, 17)
       break
     case 'groceries':
       drawText('x', 51, 350, 17)
@@ -69,6 +70,10 @@ async function generatePdf(profile, reason) {
     case 'sport':
       drawText('x', 51, 229, 17)
       break
+    case 'convocation':
+      break;
+    case 'mission':
+      break;
   }
 
   let locationSize = idealFontSize(font, profile['done-at'] || profile.town, 83, 7, 11);
@@ -79,20 +84,23 @@ async function generatePdf(profile, reason) {
     locationSize = 7;
   }
 
-  drawText(profile['done-at'] || profile.town, 375, 140, locationSize)
+  drawText(profile['done-at'] || profile.town, 110, 226, locationSize)
 
-  if (reason !== '') {
-    drawText(String((new Date).getDate()).padStart(2, '0'), 478, 140)
-    drawText(String((new Date).getMonth() + 1).padStart(2, '0'), 502, 140)
-  }
+  const dateSigned = String((new Date).getDate()).padStart(2, '0') + '/' + 
+    String((new Date).getMonth() + 1).padStart(2, '0') + '/' +
+    String((new Date).getFullYear())
+
+  drawText(dateSigned, 105, 201)
+  drawText(String((new Date).getHours()).padStart(2, '0'), 195, 201)
+  drawText(String((new Date).getMinutes()).padStart(2, '0'), 225, 201)
 
   const signatureArrayBuffer = await fetch(profile.signature).then(res => res.arrayBuffer())
   const signatureImage = await pdfDoc.embedPng(signatureArrayBuffer)
-  const signatureDimensions = signatureImage.scale(1 / (signatureImage.width / 150))
+  const signatureDimensions = signatureImage.scale(1 / (signatureImage.width / 80))
 
   page.drawImage(signatureImage, {
-    x: page.getWidth() - signatureDimensions.width - 100,
-    y: 30,
+    x: page.getWidth() - signatureDimensions.width - 380,
+    y: 130,
     width: signatureDimensions.width,
     height: signatureDimensions.height,
   })
