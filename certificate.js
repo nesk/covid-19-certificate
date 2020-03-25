@@ -1,4 +1,10 @@
-const { PDFDocument, StandardFonts } = PDFLib
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+import { PDFDocument, StandardFonts } from 'pdf-lib'
+import QRCode from 'qrcode'
+
+import pdfBase from './certificate.pdf'
+import './main.css'
 
 const $ = (...args) => document.querySelector(...args)
 const $$ = (...args) => document.querySelectorAll(...args)
@@ -16,7 +22,7 @@ function hasProfile() {
 }
 
 function saveProfile() {
-  for (field of $$('#form-profile input:not([disabled]):not([type=checkbox])')) {
+  for (const field of $$('#form-profile input:not([disabled]):not([type=checkbox])')) {
     localStorage.setItem(field.id.substring('field-'.length), field.value)
   }
 
@@ -45,8 +51,7 @@ function idealFontSize(font, text, maxWidth, minSize, defaultSize){
 async function generatePdf(profile, reason) {
   const date = new Date()
   const data = "Nom/Prénom: "+profile.name+" ; Date de naissance: "+profile.birthday+" ; lieu : "+profile.address+" "+profile.zipcode+" "+profile.town+" ; Heure : "+ profile.heure + " ; Motif: " + reason;
-  const url = '/covid-19-certificate/certificate.pdf'
-  const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
+  const existingPdfBytes = await fetch(pdfBase).then(res => res.arrayBuffer())
 
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
   const page = pdfDoc.getPages()[0]
