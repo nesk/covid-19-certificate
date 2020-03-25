@@ -164,6 +164,10 @@ $('#reset-signature').addEventListener('click', () => signaturePad.clear())
 
 $('#form-generate').addEventListener('submit', async event => {
   event.preventDefault()
+
+  const button = event.target.querySelector('button[type=submit]')
+  button.disabled = true
+
   const reason = getAndSaveReason()
   const profile = getProfile()
 
@@ -180,6 +184,8 @@ $('#form-generate').addEventListener('submit', async event => {
   }
 
   const pdfBlob = await generatePdf(profile, reason)
+  button.disabled = false
+
   downloadBlob(pdfBlob, 'attestation.pdf')
 })
 
