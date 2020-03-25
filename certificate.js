@@ -37,29 +37,36 @@ async function generatePdf(profile, reason) {
     page.drawText(text, {x, y, size, font})
   }
 
-  drawText(profile.name, 125, 636)
-  drawText(profile.birthday, 125, 612)
-  drawText(`${profile.address} ${profile.zipcode} ${profile.town}`, 143, 588)
+  drawText(profile.name, 125, 685)
+  drawText(profile.birthday, 125, 661)
+  drawText(profile.birthplace, 95, 637)
+  drawText(`${profile.address} ${profile.zipcode} ${profile.town}`, 140, 613)
 
   switch (reason) {
     case 'work':
-      drawText('x', 77, 492, 25)
+      drawText('x', 76.5, 526, 20)
       break
     case 'groceries':
-      drawText('x', 77, 433, 25)
+      drawText('x', 76.5, 476.5, 20)
       break
     case 'health':
-      drawText('x', 77, 401, 25)
+      drawText('x', 76.5, 436, 20)
       break
     case 'family':
-      drawText('x', 77, 371, 25)
+      drawText('x', 76.5, 399.5, 20)
       break
     case 'sport':
-      drawText('x', 77, 335, 25)
+      drawText('x', 76.5, 344, 20)
+      break
+    case 'notification':
+      drawText('x', 76.5, 297, 20)
+      break
+    case 'mission':
+      drawText('x', 76.5, 261, 20)
       break
   }
 
-  drawText(profile['done-at'] || profile.town, 120, 283)
+  drawText(profile['done-at'] || profile.town, 110, 225)
 
   if (reason !== '') {
     const date = [
@@ -68,21 +75,18 @@ async function generatePdf(profile, reason) {
       String((new Date).getFullYear()),
     ].join('/')
 
-    const time = [
-      String((new Date).getHours()).padStart(2, '0'),
-      String(Math.floor((new Date).getMinutes() / 5) * 5).padStart(2, '0'), // Round the minutes to lower X0 or X5 value
-    ].join('h')
-
-    drawText(`${date} à ${time}`, 110, 259)
+    drawText(date, 105, 201)
+    drawText(String((new Date).getHours()).padStart(2, '0'), 195, 201)
+    drawText(String((new Date).getMinutes()).padStart(2, '0'), 225, 201)
   }
 
   const signatureArrayBuffer = await fetch(profile.signature).then(res => res.arrayBuffer())
   const signatureImage = await pdfDoc.embedPng(signatureArrayBuffer)
-  const signatureDimensions = signatureImage.scale(1 / (signatureImage.width / 150))
+  const signatureDimensions = signatureImage.scale(1 / (signatureImage.width / 80))
 
   page.drawImage(signatureImage, {
-    x: 130,
-    y: 100,
+    x: page.getWidth() - signatureDimensions.width - 380,
+    y: 130,
     width: signatureDimensions.width,
     height: signatureDimensions.height,
   })
