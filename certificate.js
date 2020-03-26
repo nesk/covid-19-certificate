@@ -46,7 +46,9 @@ function idealFontSize(font, text, maxWidth, minSize, defaultSize){
 
 async function generatePdf(profile, reason) {
   const date = new Date()
-  const data = `Nom/Prenom: ${profile.name}; Date de naissance: ${profile.birthday}; Lieu de naissance: ${profile.lieunaissance}; Adresse: ${profile.address} ${profile.zipcode} ${profile.town}; Heure sortie: ${profile.heure}; Heure creation: ${date.getHours()}h${date.getMinutes()}; Motif: ${reason}`;
+  const datecreation = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`
+  const heurecreation = `${date.getHours()}h${String(date.getMinutes()).padStart(2, '0')}`
+  const data = `Nom/Prenom: ${profile.name}; Date de naissance: ${profile.birthday}; Lieu de naissance: ${profile.lieunaissance}; Adresse: ${profile.address} ${profile.zipcode} ${profile.town}; Date sortie: ${profile.datesortie} a ${profile.heure.substring(0, 2)}h${profile.heure.substring(3, 5)}; Date creation: ${datecreation} à ${heurecreation}; Motif: ${reason}`;
   const existingPdfBytes = await fetch(pdfBase).then(res => res.arrayBuffer())
   
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
@@ -96,10 +98,15 @@ async function generatePdf(profile, reason) {
   drawText(profile['done-at'] || profile.town, 111, 226, locationSize)
 
   if (reason !== '') {
-    drawText(`${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}`, 92, 200)
-    drawText(profile.heure.substring(0, 2), 200, 201)
-    drawText(profile.heure.substring(3, 5), 220, 201)
+    // Date sortie
+    drawText(`${profile.datesortie}`, 92, 200)
+    drawText(`${profile.heure.substring(0, 2)}`, 200, 201)
+    drawText(`${profile.heure.substring(3, 5)}`, 220, 201)
   }
+
+  // Date création
+  drawText(`Date de création:`, 434, 145)
+  drawText(`${datecreation} à ${heurecreation}`, 428, 135)
 
   const generatedQR = await generateQR(data)
   
@@ -107,7 +114,7 @@ async function generatePdf(profile, reason) {
   
   page.drawImage(qrImage, {
     x: page.getWidth() - 170,
-    y: 140,
+    y: 155,
     width: 100,
     height: 100,
   })
@@ -150,6 +157,10 @@ if (isFacebookBrowser()) {
 
 $('#date-selector').addEventListener('change', ({ target }) => {
   $('#field-birthday').value = target.value.split('-').reverse().join('/')
+})
+
+$('#date-selector-sortie').addEventListener('change', ({ target }) => {
+  $('#field-datesortie').value = target.value.split('-').reverse().join('/')
 })
 
 $('#check-same-town').addEventListener('change', applyDoneAt)
