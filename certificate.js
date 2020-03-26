@@ -105,8 +105,8 @@ async function generatePdf(profile, reason) {
   }
 
   // Date création
-  drawText(`Date de création:`, 434, 145)
-  drawText(`${datecreation} à ${heurecreation}`, 428, 135)
+  drawText(`Date de création:`, 464, 150, 7)
+  drawText(`${datecreation} à ${heurecreation}`, 455, 144, 7)
 
   const generatedQR = await generateQR(data)
   
