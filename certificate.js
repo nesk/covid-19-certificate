@@ -26,7 +26,7 @@ function getProfile() {
 }
 
 async function generatePdf(profile, reason) {
-  const url = 'certificate.pdf?v=7b3690104165a39afafcc383b03941e35ffd700f'
+  const url = 'certificate.pdf?v=bfc885e5326a9e0d3184aed9d183bca20a9cd76f'
   const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
 
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
