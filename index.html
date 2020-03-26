@@ -17,23 +17,28 @@
 </head>
 <body>
     <div class="container">
-        <h1>COVID-19 – Générateur d'attestation de déplacement</h1>
-
-        <form id="form-profile">
-            <div class="alert alert-primary" role="alert">
-                <small>
-                    <p>
-                        Ce générateur est là pour faciliter l'usage des attestations. Les données sont stockées
-                        <u>exclusivement</u> sur votre téléphone et le code peut être consulté
-                        <a href="https://github.com/cristianpb/covid-19-certificate">sur Github</a>.
-                    </p>
-                    <a href="https://www.interieur.gouv.fr/Actualites/L-actu-du-Ministere/Attestation-de-deplacement-derogatoire-et-justificatif-de-deplacement-professionnel">
-                        Plus d'informations sur le site officiel du gouvernement.
-                    </a>
-                </small>
+        <img src="/MIN_Interieur_RVB.svg" alt="logo_ministère_interieur">
+        <div class="header-content">
+            <h1 class="flex flex-wrap">
+                <div class="covid-title">
+                    COVID-19
+                </div>
+                <div class="covid-subtitle">
+                    Générateur d'attestation de déplacement
+                </div>
+            </h1>
+            <div  class="text-alert">
+                <p>
+                    Les données saisies sont stockées exclusivement sur votre téléphone ou votre ordinateur. Aucune information n'est collectée par le Ministère de l'Intérieur.
+                    L'attestation pdf générée contient un QR Code. Ce code-barres graphique permet de lire les informations portées dans votre attestation au moment de leur saisie. 
+                    Il est lisible par tout type de lecteur de QR code générique.
+                </p>
+            </div>
             </div>
 
-            <h2>Remplissez votre profil</h2>
+
+        <h2 class="titre-2">Remplissez en ligne votre attestation numérique :</h2>
+        <form id="form-profile">
 
             <div class="form-group">
                 <label for="field-name">Nom et prénom</label>
@@ -138,20 +143,28 @@
 
 
             <br><br>
-            <button type="submit" class="btn btn-primary">Générer mon attestation</button>
+            <button type="submit" class="btn-attestation"> <span class="btn-text">Générer mon attestation</span></button>
 
         </form>
     </div>
 
-    <footer class="footer text-center">
-        <small>
-            <a href="https://github.com/cristianpb/covid-19-certificate">Code source sur github</a>
-        </small>
-        <br>
-        <small>
-            DNUM -SDIT
-        </small>
-    </footer>
+    <div class="">
+        <p class="github">
+            Le code source de cette application est consultable sur  <a href="" class="github-link">Github</a>.
+        </p>
+        <p class="label-mi">
+            Ministère de l'Intérieur - DNUM - SDIT
+        </p> 
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-links">
+            <a href="" class="footer-link">Mentions légales</a>
+            <a href="" class="footer-link">Confidentialité</a>
+            <a href="" class="footer-link">Informations du gouvernement sur le Covid-19</a> 
+            <a href="" class="footer-link">Plus d’infos au  <span class="num-08">0 800 130 000</span></a>
+        </div>
+    </footer> 
 
     <div class="alert alert-danger" role="alert" style="display: none" id="alert-facebook">
         ATTENTION !! Vous utilisez actuellement le navigateur Facebook, ce générateur ne fonctionne pas correctement au
