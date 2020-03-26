@@ -11,7 +11,13 @@ const $$ = (...args) => document.querySelectorAll(...args)
 
 const generateQR = async text => {
   try {
-    return await QRCode.toDataURL(text)
+    var opts = {
+      errorCorrectionLevel: 'M',
+      type: 'image/png',
+      quality: 0.92,
+      margin: 1,
+    }
+    return await QRCode.toDataURL(text, opts)
   } catch (err) {
     console.error(err)
   }
@@ -48,7 +54,7 @@ async function generatePdf(profile, reason) {
   const date = new Date()
   const datecreation = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`
   const heurecreation = `${date.getHours()}h${String(date.getMinutes()).padStart(2, '0')}`
-  const data = `Nom/Prenom: ${profile.name}; Date de naissance: ${profile.birthday}; Lieu de naissance: ${profile.lieunaissance}; Adresse: ${profile.address} ${profile.zipcode} ${profile.town}; Date sortie: ${profile.datesortie} a ${profile.heure.substring(0, 2)}h${profile.heure.substring(3, 5)}; Date creation: ${datecreation} à ${heurecreation}; Motif: ${reason}`;
+  const data = `DateCreation: ${datecreation} à ${heurecreation}; Nom/Prenom: ${profile.name}; Naissance: ${profile.birthday} a ${profile.lieunaissance}; Adresse: ${profile.address} ${profile.zipcode} ${profile.town}; Sortie: ${profile.datesortie} a ${profile.heure.substring(0, 2)}h${profile.heure.substring(3, 5)}; Motif: ${reason}`;
   const existingPdfBytes = await fetch(pdfBase).then(res => res.arrayBuffer())
   
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
