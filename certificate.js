@@ -17,46 +17,45 @@ const generateQR = async text => {
   }
 }
 
-function saveProfile() {
+function saveProfile () {
   for (const field of $$('#form-profile input:not([disabled]):not([type=checkbox])')) {
     localStorage.setItem(field.id.substring('field-'.length), field.value)
   }
-
 }
 
-function getProfile() {
+function getProfile () {
   const fields = {}
-  for (let i = 0; i < localStorage.length; i++){
+  for (let i = 0; i < localStorage.length; i++) {
     const name = localStorage.key(i)
     fields[name] = localStorage.getItem(name)
   }
   return fields
 }
 
-function idealFontSize(font, text, maxWidth, minSize, defaultSize){
-  let currentSize = defaultSize;
-  let textWidth = font.widthOfTextAtSize(text, defaultSize);
+function idealFontSize (font, text, maxWidth, minSize, defaultSize) {
+  let currentSize = defaultSize
+  let textWidth = font.widthOfTextAtSize(text, defaultSize)
 
-  while (textWidth > maxWidth && currentSize > minSize){
-    textWidth = font.widthOfTextAtSize(text, --currentSize);
+  while (textWidth > maxWidth && currentSize > minSize) {
+    textWidth = font.widthOfTextAtSize(text, --currentSize)
   }
 
-  return (textWidth > maxWidth) ? null : currentSize;
+  return (textWidth > maxWidth) ? null : currentSize
 }
 
-async function generatePdf(profile, reason) {
+async function generatePdf (profile, reason) {
   const date = new Date()
-  const data = `Nom/Prenom: ${profile.name}; Date de naissance: ${profile.birthday}; Lieu de naissance: ${profile.lieunaissance}; Adresse: ${profile.address} ${profile.zipcode} ${profile.town}; Heure sortie: ${profile.heure}; Heure creation: ${date.getHours()}h${date.getMinutes()}; Motif: ${reason}`;
+  const data = `Nom/Prenom: ${profile.name}; Date de naissance: ${profile.birthday}; Lieu de naissance: ${profile.lieunaissance}; Adresse: ${profile.address} ${profile.zipcode} ${profile.town}; Heure sortie: ${profile.heure}; Heure creation: ${date.getHours()}h${date.getMinutes()}; Motif: ${reason}`
   const existingPdfBytes = await fetch(pdfBase).then(res => res.arrayBuffer())
-  
+
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
   const page = pdfDoc.getPages()[0]
-  
+
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
   const drawText = (text, x, y, size = 11) => {
-    page.drawText(text, {x, y, size, font})
+    page.drawText(text, { x, y, size, font })
   }
-  
+
   drawText(profile.name, 123, 686)
   drawText(profile.birthday, 123, 661)
   drawText(profile.lieunaissance, 92, 638)
@@ -85,12 +84,12 @@ async function generatePdf(profile, reason) {
       drawText('x', 76, 260, 19)
       break
   }
-  let locationSize = idealFontSize(font, profile['done-at'] || profile.town, 83, 7, 11);
+  let locationSize = idealFontSize(font, profile['done-at'] || profile.town, 83, 7, 11)
 
-  if (!locationSize){
+  if (!locationSize) {
     alert('Le nom de la ville risque de ne pas être affiché correctement en raison de sa longueur. ' +
-      'Essayez d\'utiliser des abréviations ("Saint" en "St." par exemple) quand cela est possible.');
-    locationSize = 7;
+      'Essayez d\'utiliser des abréviations ("Saint" en "St." par exemple) quand cela est possible.')
+    locationSize = 7
   }
 
   drawText(profile['done-at'] || profile.town, 111, 226, locationSize)
@@ -102,22 +101,22 @@ async function generatePdf(profile, reason) {
   }
 
   const generatedQR = await generateQR(data)
-  
+
   const qrImage = await pdfDoc.embedPng(generatedQR)
-  
+
   page.drawImage(qrImage, {
     x: page.getWidth() - 170,
     y: 140,
     width: 100,
     height: 100,
   })
-  
+
   const pdfBytes = await pdfDoc.save()
-  
-  return new Blob([pdfBytes], {type: 'application/pdf'})
+
+  return new Blob([pdfBytes], { type: 'application/pdf' })
 }
 
-function downloadBlob(blob, fileName) {
+function downloadBlob (blob, fileName) {
   const link = document.createElement('a')
   var url = URL.createObjectURL(blob)
   link.href = url
@@ -126,26 +125,26 @@ function downloadBlob(blob, fileName) {
   link.click()
 }
 
-function getAndSaveReason() {
-  const {value} = $('input[name="field-reason"]:checked')
+function getAndSaveReason () {
+  const { value } = $('input[name="field-reason"]:checked')
   localStorage.setItem('last-reason', value)
   return value
 }
 
 // see: https://stackoverflow.com/a/32348687/1513045
-function isFacebookBrowser() {
+function isFacebookBrowser () {
   const ua = navigator.userAgent || navigator.vendor || window.opera
-  return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1)
+  return (ua.indexOf('FBAN') > -1) || (ua.indexOf('FBAV') > -1)
 }
 
-function applyDoneAt() {
+function applyDoneAt () {
   const { checked } = $('#check-same-town')
-  $('#group-done-at').style.display = checked ? 'none' : 'block';
-  $('#field-done-at').disabled = checked;
+  $('#group-done-at').style.display = checked ? 'none' : 'block'
+  $('#field-done-at').disabled = checked
 }
 
 if (isFacebookBrowser()) {
-  $('#alert-facebook').style.display = 'block';
+  $('#alert-facebook').style.display = 'block'
 }
 
 $('#date-selector').addEventListener('change', ({ target }) => {
