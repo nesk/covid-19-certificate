@@ -164,6 +164,12 @@ $('#date-selector').addEventListener('change', ({ target }) => {
   $('#field-birthday').value = target.value.split('-').reverse().join('/')
 })
 
+$('#date-selector').addEventListener('click', ({ target }) => {
+  const dateNow = new Date().toISOString().split('T')[0]
+  $('#date-selector').setAttribute('max',dateNow)
+})
+
+
 $('#date-selector-sortie').addEventListener('change', ({ target }) => {
   $('#field-datesortie').value = target.value.split('-').reverse().join('/')
 })
