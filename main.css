@@ -110,6 +110,10 @@ h1.flex.flex-wrap {
   flex-wrap: wrap;
 }
 
+.logo {
+  max-height: 15em;
+}
+
 
 .covid-title {
   display: flex;
