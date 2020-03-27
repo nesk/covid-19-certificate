@@ -27,6 +27,21 @@ form, #alert-print {
 
 h1 {
 	font-size: 2em;
+
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
+  h1 {
+    font-size: 2.5em;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  h1 {
+    font-size: 3em;
+  }
 }
 
 h2 {
@@ -112,29 +127,37 @@ h1.flex.flex-wrap {
 
 .logo {
   max-height: 15em;
+  min-height: 8em;
 }
 
 
 .covid-title {
   display: flex;
   align-items: center;
-  padding: 8px;
-  flex-grow: 1;
+  padding: 0.3em;
   font-family: 'marianne-regular', Arial, Helvetica, sans-serif;
-  font-size: 0.79em;
+  font-size: 0.50em;
   color: #ffffff;
   background-color: #000191;
+  flex-grow: 1;
+}
+
+@media (min-width: 992px) {
+  .covid-title {
+    flex-grow: 0;
+  }
 }
 
 
 .covid-subtitle {
   display: flex;
   align-items: center;
-  font-size: 0.80e;
-  padding: 8px;
+  font-size: 0.50em;
+  padding: 0.3em;
   background-color: #e1000f;
   text-transform:uppercase ;
   color: #ffffff;
+  flex-grow: 1;
 }
 
 
@@ -212,3 +235,4 @@ h1.flex.flex-wrap {
   font-weight: bold;
   color: #00a94f;
 }
+
