@@ -16,80 +16,74 @@
     <title>COVID-19 – Générateur d'attestation de déplacement</title>
 </head>
 <body>
-    <div class="container">
+    <header class="wrapper">
         <img class="logo" src="/MIN_Interieur_RVB.svg" alt="logo_ministère_interieur">
-        <div class="header-content">
+        <div>
             <h1 class="flex flex-wrap">
-                <div class="covid-title">
+                <span class="covid-title">
                     COVID-19
-                </div>
-                <div class="covid-subtitle">
+                </span>
+                <span class="covid-subtitle">
                     Générateur d'attestation de&nbsp;déplacement
-                </div>
+                </span>
             </h1>
-            <div  class="text-alert">
-                <p>
-                    Les données saisies sont stockées exclusivement sur votre téléphone ou votre ordinateur. Aucune information n'est collectée par le Ministère de l'Intérieur.
-                    L'attestation pdf générée contient un QR Code. Ce code-barres graphique permet de lire les informations portées dans votre attestation au moment de leur saisie. 
-                    Il peut être déchiffré à l'aide de tout type de lecteur de QR code générique.
-                </p>
-            </div>
+            <p class="text-alert">
+                Les données saisies sont stockées exclusivement sur votre téléphone ou votre ordinateur. Aucune information n'est collectée par le Ministère de l'Intérieur.
+                L'attestation pdf générée contient un QR Code. Ce code-barres graphique permet de lire les informations portées dans votre attestation au moment de leur saisie. 
+                Il peut être déchiffré à l'aide de tout type de lecteur de QR code générique.
+            </p>
         </div>
+    </header>
 
+    <div class="wrapper">
 
-        <h2 class="titre-2">Remplissez en ligne votre attestation numérique :</h2>
         <form id="form-profile">
-
+            <h2 class="titre-2">Remplissez en ligne votre attestation numérique :</h2>
+            
             <div class="form-group">
                 <label for="field-name">Nom et prénom</label>
                 <input type="text" class="form-control" id="field-name" name="name" autofocus>
             </div>
-
+            
             <div class="form-group">
                 <label for="field-birthday">Date de naissance</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="field-birthday" name="birthday">
-                    <div class="input-group-append" id="date-selector-group">
-                        <input type="date" id="date-selector">
-                        <span class="input-group-text text-primary">
-                            <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="calendar-alt" class="svg-inline--fa fa-calendar-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"></path></svg>
-                        </span>
-                    </div>
+                    <input type="text" class="form-control" id="field-birthday" name="birthday" placeholder="JJ/MM/YYYY">
                 </div>
             </div>
-
+            
             <div class="form-group">
                 <label for="field-lieunaissance">Lieu de naissance</label>
                 <input type="text" class="form-control" id="field-lieunaissance" name="lieunaissance">
             </div>
-
+            
             <div class="form-group">
                 <label for="field-address">Adresse</label>
                 <input type="text" class="form-control" id="field-address" name="address">
             </div>
-
+            
             <div class="form-group">
                 <label for="field-town">Ville</label>
                 <input type="text" class="form-control" id="field-town" name="town">
             </div>
-
+            
             <div class="form-group">
                 <label for="field-zipcode">Code Postal</label>
                 <input type="text" class="form-control" id="field-zipcode" name="zipcode">
             </div>
-
+            
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="check-same-town" checked>
                 <label class="form-check-label" for="check-same-town">Je réside actuellement à cette adresse</label>
             </div>
-
+            
             <div class="form-group" id="group-done-at" style="display: none">
                 <label for="field-done-at">Fait à</label>
                 <input type="text" class="form-control" id="field-done-at" name="done-at" disabled>
             </div>
-
+            
             <h5>Choisissez un motif de sortie</h5>
-
+            
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="field-reason" id="radio-travail" value="travail" checked>
                 <label class="form-check-label" for="radio-travail">Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle, lorsqu'ils sont indispensables à l'exercice d’activités ne pouvant être organisées sous forme de télétravail ou déplacements professionnels ne pouvant être différés.</label>
@@ -99,17 +93,17 @@
                 <input class="form-check-input" type="radio" name="field-reason" id="radio-courses" value="courses">
                 <label class="form-check-label" for="radio-courses">Déplacements pour effectuer des achats de fournitures nécessaires à l’activité professionnelle et des achats de première nécessité dans des établissements dont les activités demeurent autorisées <a href="https://www.service-public.fr/particuliers/actualites/A13921" target="_blank">(liste sur gouvernement.fr)</a>.</label>
             </div>
-
+            
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="field-reason" id="radio-sante" value="sante">
                 <label class="form-check-label" for="radio-sante">Consultations et soins ne pouvant être assurés à distance et ne pouvant être différés ; consultations et soins des patients atteints d'une affection de longue durée.</label>
             </div>
-
+            
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="field-reason" id="radio-famille" value="famille">
                 <label class="form-check-label" for="radio-famille">Déplacements pour motif familial impérieux, pour l’assistance aux personnes vulnérables ou la garde d’enfants.</label>
             </div>
-
+            
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="field-reason" id="radio-sport" value="sport">
                 <label class="form-check-label" for="radio-sport">Déplacements brefs, dans la limite d'une heure quotidienne et dans un rayon maximal d'un kilomètre autour du domicile, liés soit à l'activité physique individuelle des personnes, à l'exclusion de toute pratique sportive collective et de toute proximité avec d'autres personnes, soit à la promenade avec les seules personnes regroupées dans un même domicile, soit aux besoins des animaux de compagnie.</label>
@@ -122,29 +116,24 @@
                 <input class="form-check-input" type="radio" name="field-reason" id="radio-missions" value="missions">
                 <label class="form-check-label" for="radio-missions">Participation à des missions d’intérêt général sur demande de l’autorité administrative.</label>
             </div>
-
+            
             <div class="form-group">
                 <label for="field-datesortie">Date de sortie</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="field-datesortie" name="datesortie">
-                    <div class="input-group-append" id="date-selector-group-sortie">
-                        <input type="date" id="date-selector-sortie">
-                        <span class="input-group-text text-primary">
-                            <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="calendar-alt" class="svg-inline--fa fa-calendar-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"></path></svg>
-                        </span>
-                    </div>
+                    <input type="text" class="form-control" id="field-datesortie" name="datesortie" placeholder="JJ/MM/YYYY">
                 </div>
             </div>
-
+            
             <div class="form-group">
                 <label for="field-heure">Heure de sortie</label>
                 <input type="time" class="form-control" id="field-heure" name="heure">
             </div>
-
-
-            <br><br>
-            <button type="submit" class="btn-attestation"> <span class="btn-text">Générer mon attestation</span></button>
-
+            
+            
+            <p class="text-center mt-5">
+                <button type="submit" class="btn btn-primary btn-attestation"> <span class="btn-text">Générer mon attestation</span></button>
+            </p>
+        
         </form>
     </div>
 
@@ -162,7 +151,7 @@
             <a href="./confidentialite.html" target="_blank" class="footer-link">Confidentialité</a>
             <a href="https://www.interieur.gouv.fr/Infos-du-site/Mentions-legales" target="_blank" class="footer-link">Mentions légales</a>
             <a href="https://www.gouvernement.fr/info-coronavirus" target="_blank" class="footer-link">Informations du gouvernement sur le Covid-19</a> 
-            <p class="footer-link" >Plus d’infos au<a class="num-08" href="tel:0800130000"> 0 800 130 000</a></p>
+            <p class="footer-link" >Plus d’infos au<a class="num-08" href="tel:0800130000"> 0 800 130 000</a></div>
         </div>
     </footer> 
 
