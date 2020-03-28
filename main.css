@@ -234,3 +234,46 @@ canvas {
   color: #00a94f;
 }
 
+.confidentialite {
+  .cookies {
+    border-collapse: collapse;
+
+    td,
+    th {
+      border: 1px solid #000191;
+      padding: 8px;
+    }
+
+    .header-row {
+      font-weight: bold;
+      color: #ffffff;
+      background-color: #000191;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .name-col {
+      font-weight: bold;
+      padding: 8px 16px;
+      color: #000191;
+    }
+  }
+
+  .btn-wrapper {
+    display: flex;
+    justify-content: center;
+
+    .btn-generateur {
+      padding: 0.4em 0.3em;
+      font-size: 2em;
+      font-weight: bold;
+      background-color: #000191;
+      border-radius: 0.5em;
+      
+      a {
+        color: #ffffff;
+        text-decoration: none;
+      }
+    }
+  }
+}
