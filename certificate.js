@@ -57,11 +57,11 @@ async function generatePdf (profile, reason) {
   const existingPdfBytes = await fetch(pdfBase).then(res => res.arrayBuffer())
 
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
-  const page = pdfDoc.getPages()[0]
+  const page1 = pdfDoc.getPages()[0]
 
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
   const drawText = (text, x, y, size = 11) => {
-    page.drawText(text, { x, y, size, font })
+    page1.drawText(text, { x, y, size, font })
   }
 
   drawText(profile.name, 123, 686)
@@ -117,11 +117,20 @@ async function generatePdf (profile, reason) {
 
   const qrImage = await pdfDoc.embedPng(generatedQR)
 
-  page.drawImage(qrImage, {
-    x: page.getWidth() - 170,
+  page1.drawImage(qrImage, {
+    x: page1.getWidth() - 170,
     y: 155,
     width: 100,
     height: 100,
+  })
+
+  pdfDoc.addPage()
+  const page2 = pdfDoc.getPages()[1]
+  page2.drawImage(qrImage, {
+    x: 50,
+    y: page2.getHeight() - 350,
+    width: 300,
+    height: 300,
   })
 
   const pdfBytes = await pdfDoc.save()
