@@ -21,7 +21,7 @@
             padding: 20px;
         }
 
-        h4, form, footer, #alert-print {
+        h4, form, footer, #alert-official {
             margin: 30px auto;
             max-width: 400px;
         }
@@ -56,7 +56,7 @@
             right: 10px;
         }
 
-        #alert-print {
+        #alert-official {
             margin: 1rem auto 0;
         }
 
@@ -78,6 +78,10 @@
 
         svg {
             height: 1em;
+        }
+
+        .close {
+            margin: 0 0 15px 15px;
         }
 
         .btn-loader:not([disabled]) svg {
@@ -105,11 +109,23 @@
 <body>
     <h4>COVID-19 – Générateur d'attestation de déplacement</h4>
 
-    <div class="alert alert-danger" role="alert" id="alert-print">
+    <div class="alert alert-success" role="alert" id="alert-official">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+        <p><small>
+            <a href="https://media.interieur.gouv.fr/deplacement-covid-19/">
+                🇫🇷 Le gouvernement a publié son propre générateur !
+            </a>
+            Il a été développé à partir de mon code (🥳), la confidentialité de vos données reste donc identique, et
+            il vous permettra de présenter votre attestation sur smartphone.
+        </small></p>
+
         <small>
-            🚨 Les attestations numériques
-            <a href="https://twitter.com/Place_Beauvau/status/1240236276416118784">ne sont plus autorisées</a>,
-            vous pouvez utiliser ce générateur mais vous serez malheureusement obligés d'imprimer.
+            Mon outil restera en place mais je ne continuerai pas à le maintenir, je l'avais créé afin de faciliter le
+            remplissage des attestations, maintenant il ne me semble plus nécessaire.
+            <br>Merci pour votre soutien à tous.&nbsp;🙏
         </small>
     </div>
 
@@ -270,6 +286,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.4.1/dist/pdf-lib.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
-    <script src="certificate.js?v=c7cd5d0872a74e134726693a8a2e5c9c34f961b0"></script>
+    <script src="certificate.js?v=183293d064f4724dacd086cb5cfeee72d758ad3d"></script>
 </body>
 </html>

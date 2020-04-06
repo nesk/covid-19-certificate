@@ -137,6 +137,15 @@ if (isFacebookBrowser()) {
   $('#alert-facebook').style.display = 'block';
 }
 
+$('#alert-official .close').addEventListener('click', ({ target }) => {
+  target.offsetParent.style.display = 'none'
+  localStorage.setItem('dismiss-official-alert', true)
+})
+
+if (localStorage.getItem('dismiss-official-alert')) {
+  $('#alert-official').style.display = 'none'
+}
+
 if (hasProfile()) {
   $('#form-generate').style.display = 'block'
 } else {
